@@ -218,6 +218,19 @@ public class Arrays {
         return arr;
     }
 
+    public int missingNumber(int[] nums) {
+        java.util.Arrays.sort(nums);
+
+        if(nums[0] != 0) return 0;
+
+        if(nums[nums.length-1] != nums.length) return nums.length;
+
+        for(int i=1; i<nums.length; i++){
+            if(nums[i] != i) return i;
+        }
+        return 0;
+    }
+
 
 }
 
