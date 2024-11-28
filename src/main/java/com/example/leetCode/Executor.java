@@ -7,7 +7,5 @@ public class Executor {
 
         String adena = "adena software";
 
-        int result = arr.hammingWeight(11);
-
     }
 }
