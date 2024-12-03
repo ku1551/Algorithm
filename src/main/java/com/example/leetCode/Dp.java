@@ -36,4 +36,8 @@ public class Dp {
 
         return dp[amount] != amount + 1 ? dp[amount] : -1;
     }
+
+    public int lengthOfLIS(int[] nums) {
+
+    }
 }
