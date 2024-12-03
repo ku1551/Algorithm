@@ -1,6 +1,9 @@
 package com.example.leetCode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 public class Dp {
     public int climbStairs(int n) { // 70. Climbing Stairs
@@ -39,5 +42,57 @@ public class Dp {
 
     public int lengthOfLIS(int[] nums) {
 
+        int n = nums.length;
+
+        if(n == 0) return 0;
+
+        int[] arr = new int[n];
+
+        Arrays.fill(arr, 1);
+
+        int result = 1;
+
+        for(int i=1; i< n; i++){
+            for(int j=0; j<i; j++){
+                if(nums[i] > nums[j]){
+                    arr[i] = Math.max(arr[i], arr[j]+1);
+                }
+            }
+            result = Math.max(arr[i], result);
+        }
+        return result;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
