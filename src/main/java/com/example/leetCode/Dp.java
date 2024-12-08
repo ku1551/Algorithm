@@ -1,6 +1,5 @@
 package com.example.leetCode;
 
-import java.util.*;
 import java.util.Arrays;
 
 public class Dp {
@@ -38,25 +37,62 @@ public class Dp {
         return dp[amount] != amount + 1 ? dp[amount] : -1;
     }
 
-    public void reverseString(char[] s) {
-        //내풀이
-//        Stack<Character> stack = new Stack<Character>();
-//
-//        for(int i=0;i<s.length;i++){
-//            stack.push(s[i]);
-//        }
-//        for(int i=0;i<s.length;i++){
-//            s[i] = stack.pop();
-//        }
-        int left = 0, right = s.length - 1;
-        while (left < right) {
-            char temp = s[left];
-            s[left] = s[right];
-            s[right] = temp;
-            left++;
-            right--;
+    public int lengthOfLIS(int[] nums) {
+
+        int n = nums.length;
+
+        if(n == 0) return 0;
+
+        int[] arr = new int[n];
+
+        Arrays.fill(arr, 1);
+
+        int result = 1;
+
+        for(int i=1; i< n; i++){
+            for(int j=0; j<i; j++){
+                if(nums[i] > nums[j]){
+                    arr[i] = Math.max(arr[i], arr[j]+1);
+                }
+            }
+            result = Math.max(arr[i], result);
         }
+        return result;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public String[] reorderLogFiles(String[] logs) {
 
