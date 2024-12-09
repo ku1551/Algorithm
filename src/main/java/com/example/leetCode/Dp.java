@@ -107,7 +107,95 @@ public class Dp {
         return Collections.max(count.entrySet()
                 , Map.Entry.comparingByValue()).getKey();
     }
+
+    public int longestCommonSubsequence(String text1, String text2) { // 1143. Longest Common Subsequence
+        int w = text1.length();
+        int h = text2.length();
+
+        int[][] dp = new int[w+1][h+1];
+
+        for(int i=1; i<=w; i++){
+            for(int j=1; j<=h; j++){
+                if(text1.charAt(i-1) == text2.charAt(j-1)){
+                    dp[i][j] = dp[i-1][j-1]+1;
+                } else {
+                    dp[i][j] = Math.max(dp[i][j-1], dp[i-1][j]);
+                }
+            }
+        }
+        return dp[w][h];
+    }
+
+    public boolean wordBreak(String s, List<String> wordDict) { // 139. Word Break
+        Set<String> word = new HashSet<>(wordDict);
+
+        boolean[] dp = new boolean[s.length()+1];
+
+        dp[0] = true;
+
+        for(int i=1; i<=s.length(); i++){
+            for(int j=0; j<i; j++){
+                if(dp[i] && word.contains(s.substring(j, i))){
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+
+    public List<List<Integer>> combinationSum(int[] candidates, int target) { // 39. Combination Sum
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        dfs(0, candidates, target, result, list);
+
+        return result;
+    }
+
+    private void dfs(int index, int[] candidates, int target, List<List<Integer>> result, List<Integer> list) {
+        if(index == candidates.length){
+            if(target == 0){
+                result.add(new ArrayList<>(list));
+            }
+            return;
+        }
+        if(candidates[index] <= target){
+            list.add(candidates[index]);
+            dfs(index, candidates, target - candidates[index], result, list);
+            list.removeLast();
+        }
+
+        dfs(index+1, candidates, target, result, list);
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
