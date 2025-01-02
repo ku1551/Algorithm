@@ -182,6 +182,104 @@ public class Arrays {
         return area;
     }
 
+    public int lengthOfLIS(int[] nums) {
+        int result = 0;
+
+        for(int i=0; i<nums.length; i++){
+            for(int j=i; j<nums.length; j++){
+
+            }
+        }
+
+        return result;
+    }
+
+    public int averageValue(int[] nums) {
+        int sum =0, cnt = 0;
+        for(int i=0; i<nums.length; i++){
+            if(nums[i]%3 == 0){
+                cnt++;
+                sum += nums[i];
+            }
+        }
+
+        return cnt == 0 ? 0 : Math.round(sum/cnt);
+
+    }
+
+    public String[] findWords(String[] words) {
+        String setA = "qwertyuiop";
+        String setB = "asdfghjkl";
+        String setC = "zxcvbnm";
+
+        List<String> result = new ArrayList<>();
+
+        for(int i=0; i< words.length; i++){
+            String[] s = words[i].toLowerCase().split("");
+            boolean tmp = false;
+            if(setA.contains(s[0])){
+                tmp = validWord(setA, s);
+            } else if (setB.contains(s[0])) {
+                tmp = validWord(setB, s);
+            } else{
+                tmp = validWord(setC, s);
+            }
+            if(tmp) result.add(words[i]);
+        }
+
+        return result.toArray(new String[result.size()]);
+    }
+
+    public boolean validWord(String set, String[] word){
+
+        for(int i=0; i< word.length; i++){
+            if(!set.contains(word[i])) return false;
+        }
+
+        return true;
+    }
+
+
+    public int numEquivDominoPairs(int[][] dominoes) {
+        Set<String> set = new HashSet<>();
+        int result = 0;
+
+        for(int i=0; i<dominoes.length; i++){
+            set.add(String.valueOf(dominoes[i][0])+ String.valueOf(dominoes[i][1]));
+            set.add(String.valueOf(dominoes[i][1])+ String.valueOf(dominoes[i][0]));
+        }
+
+        return (dominoes.length*2 - set.size())/2;
+    }
+
+    public boolean isPalindrome2(String s) { // 125. Valid Palindrome
+
+        String filter = s.replaceAll("[^A-Za-z0-9]", "").toLowerCase();
+        String revert = new StringBuilder(filter).reverse().toString();
+
+        return filter.equals(revert);
+    }
+    public boolean isPalindrome(String s) { // 125. Valid Palindrome
+        int start = 0;
+        int end = s.length()-1;
+
+        while(start < end){
+            if(!Character.isLetterOrDigit(s.charAt(start))){
+                start++;
+            }else if(!Character.isLetterOrDigit(s.charAt(end))){
+                end--;
+            }else{
+                if(Character.toLowerCase(s.charAt(start)) != Character.toLowerCase(s.charAt(end))){
+                    return false;
+                }
+                start++;
+                end--;
+            }
+        }
+
+        return true;
+    }
+
 
 }
 

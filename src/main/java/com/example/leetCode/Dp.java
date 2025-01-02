@@ -168,6 +168,83 @@ public class Dp {
         dfs(index+1, candidates, target, result, list);
     }
 
+    public int rob1(int[] nums) { // 198.House Robber
+        int n = nums.length;
+
+        if(n == 1){
+            return nums[0];
+        }
+
+        int[] dp = new int[n];
+
+        dp[0] = nums[0];
+        dp[1] = Math.max(dp[0], nums[1]);
+
+        for(int i=2; i<n; i++){
+            dp[i] = Math.max(dp[i-1], nums[i] + dp[i-2]);
+        }
+
+        return dp[n-1];
+
+    }
+
+    public int rob2(int[] nums) {
+        int n = nums.length;
+
+        if(n < 2) return nums[0];
+
+        int[] frstRob = new int[n-1];
+        int[] lastRob = new int[n-1];
+
+        for(int i=0; i<n-1; i++){
+            frstRob[i] = nums[i];
+            lastRob[i] = nums[i+1];
+        }
+
+        return Math.max(moneyCnt(frstRob, n-1), moneyCnt(lastRob, n-1));
+
+    }
+
+    public int moneyCnt(int[] nums, int n){
+        if(n < 2) return nums[0];
+
+        int[] dp = new int[n];
+
+        dp[0] = nums[0];
+        dp[1] = Math.max(dp[0], nums[1]);
+
+        for(int i=2; i<n; i++){
+            dp[i] = Math.max(dp[i-1], nums[i]+dp[i-2]);
+        }
+
+        return dp[n-1];
+    }
+
+    public int rob2_1(int[] nums) {
+        int n = nums.length;
+
+        if(n == 1) return nums[0];
+        if(n == 2) return Math.max(nums[0], nums[1]);
+
+        int[] frstRob = Arrays.copyOfRange(nums,0,n-1);
+        int[] lastRob = Arrays.copyOfRange(nums,1, n);
+
+        int[] frstDp = new int[n-1];
+        int[] lastDp = new int[n-1];
+        frstDp[0] = frstRob[0];
+        frstDp[1] = Math.max(frstRob[0], frstRob[1]);
+
+        lastDp[0] = lastRob[0];
+        lastDp[1] = Math.max(lastRob[0], lastRob[1]);
+
+        for(int i=2; i<n-1; i++){
+            frstDp[i] = Math.max(frstDp[i-1], frstRob[i] + frstDp[i-2]);
+            lastDp[i] = Math.max(lastDp[i-1], lastRob[i] + lastDp[i-2]);
+        }
+
+        return Math.max(frstDp[n-2], lastDp[n-2]);
+    }
+
 }
 
 
