@@ -1,6 +1,8 @@
 package com.example.leetCode;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Arrays {
@@ -71,6 +73,22 @@ public class Arrays {
 
         return result;
     }
+        public int[] productExceptSelf2(int[] nums) {
+            int[] arr = new int[nums.length];
+            java.util.Arrays.fill(arr, 1);
+
+            for(int i=0; i<nums.length; i++){
+                for(int j=0; j<nums.length; j++){
+                    if(i == j){
+                        continue;
+                    }
+                    arr[i] = nums[i]* nums[j];
+                }
+            }
+            return arr;
+    }
+
+
 
     public int maxSubArray(int[] nums) {
         int nowMax =nums[0], result =nums[0];
@@ -80,6 +98,16 @@ public class Arrays {
             result = Math.max(nowMax, result);
         }
 
+        return result;
+    }
+
+    public int maxSubArray(int[] nums) {
+        int now = nums[0], result = nums[0];
+
+        for(int i=1; i<nums.length; i++){
+            now = Math.max(nums[i], now+nums[i]);
+            result = Math.max(now,result);
+        }
         return result;
     }
 
@@ -279,6 +307,98 @@ public class Arrays {
 
         return true;
     }
+
+    public void reverseString(char[] s) { // 344. Reverse String
+        int start = 0, end = s.length-1;
+
+        while(start < end){
+            char tmp = s[start];
+            s[start] = s[end];
+            s[end] = tmp;
+
+            start++;
+            end--;
+        }
+    }
+
+    public String[] reorderLogFiles(String[] logs) { // 937. Reorder Data in Log Files
+        List<String> text = new ArrayList<>();
+        List<String> num = new ArrayList<>();
+
+        for(String s : logs){
+            if(Character.isDigit(s.split(" ")[1].charAt(0))){
+                num.add(s);
+            }else{
+                text.add(s);
+            }
+        }
+
+        text.sort((s1, s2)->{
+            String[] sort1 = s1.split(" ", 2);
+            String[] sort2 = s2.split(" ", 2);
+
+            int compare = sort1[1].compareTo(sort2[1]);
+
+            if(compare == 0){
+                return sort1[0].compareTo(sort2[0]);
+            }else{
+                return compare;
+            }
+        });
+
+        text.addAll(num);
+
+        return text.toArray(new String[text.size()]);
+
+    }
+
+    public String mostCommonWord1(String paragraph, String[] banned) {
+        Set<String> ban = new HashSet<>(java.util.Arrays.asList(banned));
+
+        Map<String, Integer> map = new HashMap<>();
+
+        String[] arr = paragraph.replaceAll("\\W", " ").toLowerCase().split("\\s+");
+
+        for(String s : arr){
+            if(!ban.contains(s)){
+                map.put(s, map.getOrDefault(s, 0)+1);
+            }
+        }
+
+        return Collections.max(map.entrySet(), Map.Entry.comparingByValue()).getKey();
+    }
+    public String mostCommonWord2(String paragraph, String[] banned) {
+        Set<String> ban = new HashSet<>(java.util.Arrays.asList(banned));
+
+        return java.util.Arrays.stream(paragraph.replaceAll("\\W", " ").toLowerCase().split("\\s+"))
+                .filter(word -> !ban.contains(word) && !word.isEmpty())
+                .collect(Collectors.groupingBy(word -> word, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .get()
+                .getKey();
+    }
+
+    public List<List<String>> groupAnagrams(String[] strs) { //49 Anagrams
+        Map<String, List<String>> map = new HashMap<>();
+
+        for(String s : strs){
+            char[] arr = s.toCharArray();
+
+            java.util.Arrays.sort(arr);
+            String str = String.valueOf(arr);
+
+            if(!map.containsKey(str))  map.put(str, new ArrayList<>());
+
+            map.get(str).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
+
+
+
+
 
 
 }
