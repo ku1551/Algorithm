@@ -406,10 +406,121 @@ public class Arrays {
                 }
             }
         }
-
         return new ArrayList<>(set);
     }
 
+    public String longestPalindrome(String s) {
+        int len = s.length();
+        int left = 0, right = 0;
+        int start = 0, maxLen = 0;
+
+        if(len < 2) return s;
+
+        for(int center=0; center<  2* len -1; center++){
+            left = center/2;
+            right = left + (center%2);
+
+            while (left >= 0 && right < len && s.charAt(left) == s.charAt(right)){
+                left--;
+                right++;
+            }
+
+            int curLen = right - left-1;
+            if(curLen > maxLen){
+                maxLen = curLen;
+                start = left+1;
+            }
+        }
+        return s.substring(start, start+maxLen);
+    }
+
+    public int[] twoSum1(int[] nums, int target) {
+        for(int i=0; i<nums.length; i++){
+            for(int j = i+1; j<nums.length; j++){
+                if(nums[i] + nums[j] == target){
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return null;
+    }
+
+    public int[] twoSum2(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for(int i=0; i< nums.length; i++){
+            map.put(nums[i], i);
+        }
+
+        for(int i=0; i<nums.length; i++){
+            int result = target - nums[i];
+            if(map.containsKey(result) && i != map.get(result)) {
+                return new int[]{i, map.get(result)};
+            }
+        }
+        return null;
+    }
+
+    public int trap(int[] height) {
+        int volume = 0, left = 0, right = height.length-1,
+                maxLeft = height[left], maxRight = height[right];
+
+        while(left < right){
+            maxLeft = Math.max(height[left], maxLeft);
+            maxRight = Math.max(height[right], maxRight);
+
+            if(maxLeft <= maxRight){
+                volume += maxLeft + height[left];
+                left++;
+            }else{
+                volume += maxRight - height[right];
+                right--;
+            }
+        }
+        return volume;
+    }
+
+    public int trap1(int[] height) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        int volumn = 0;
+
+        for(int i=0; i< height.length; i++){
+            while (!stack.isEmpty() && height[i] > height[stack.peek()]){
+                Integer top = stack.pop();
+
+                if(stack.isEmpty()) break;
+
+                int distance = i-stack.peek() -1;
+
+                int waters = Math.min(height[i], height[stack.peek()])-height[top];
+
+                volumn += distance + waters;
+            }
+            stack.push(i);
+        }
+
+        return volumn;
+
+    }
+
+    public boolean isPalindrome(ListNode head) { //234.Palindrome Linked List
+        List<Integer> list = new ArrayList<>();
+
+        while(head.next != null){
+            list.add(head.val);
+            head = head.next;
+        }
+
+        int left = 0, right = list.size()-1;
+        while(left<right){
+            if(list.get(left) != list.get(right)){
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
 
 
 
