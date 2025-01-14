@@ -574,6 +574,53 @@ public class Arrays {
         return result.next;
     }
 
+    public ListNode swapPairs(ListNode head) { // 24 Swap Nodes in Pairs
+        if(head == null || head.next == null) return head;
+
+        ListNode n = head.next;
+        head.next = swapPairs(head.next.next);
+        n.next = head;
+        return n;
+    }
+
+    public ListNode oddEvenList(ListNode head) { //328 Odd Even Linked List
+        if(head == null) return head;
+
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenHead = even;
+
+        while(even != null && even.next != null){
+            odd.next = odd.next.next;
+            even.next = even.next.next;
+
+            odd = odd.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+
+        return head;
+    }
+
+    public boolean isValid(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        Map<Character, Character> map = new HashMap<>();
+
+        map.put(')', '(');
+        map.put('}', '{');
+        map.put(']', '[');
+
+        for(int i=0; i<s.length(); i++){
+            if(!map.containsKey(s.charAt(i))){
+                stack.push(s.charAt(i));
+            }else if(stack.isEmpty() || stack.pop() != s.charAt(i)){
+                return false;
+            }
+        }
+
+        return stack.isEmpty();
+    }
+
 
 
 
