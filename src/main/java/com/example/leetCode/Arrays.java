@@ -653,6 +653,16 @@ public class Arrays {
         return set;
     }
 
+    public boolean isAnagram(String s, String t) {
+        char[] arr1 = s.toCharArray();
+        char[] arr2 = t.toCharArray();
+
+        java.util.Arrays.sort(arr1);
+        java.util.Arrays.sort(arr2);
+
+        return java.util.Arrays.equals(arr1, arr2);
+    }
+
 
 
 
