@@ -663,6 +663,22 @@ public class Arrays {
         return java.util.Arrays.equals(arr1, arr2);
     }
 
+    public int[] dailyTemperatures(int[] temperatures) {
+        Deque<Integer> stack = new ArrayDeque<>();
+
+        int[] result = new int[temperatures.length];
+
+        for(int i=0; i<temperatures.length; i++){
+            while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]){
+                int last = stack.pop();
+                result[last] = i-last;
+            }
+
+            stack.push(i);
+        }
+        return result;
+    }
+
 
 
 
