@@ -679,6 +679,20 @@ public class Arrays {
         return result;
     }
 
+    public boolean isPalindrome3(String s) {
+        s = s.toLowerCase().replace(" ","").replaceAll("[^a-z0-9]","");
+
+        int j = s.length() -1;
+        for(int i=0; i< s.length()/2; i++){
+            if(s.charAt(i) != s.charAt(j)){
+                return false;
+            }else{
+                j--;
+            }
+        }
+        return true;
+    }
+
 
 
 
