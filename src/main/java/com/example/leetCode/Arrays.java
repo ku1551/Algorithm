@@ -679,18 +679,13 @@ public class Arrays {
         return result;
     }
 
-    public boolean isPalindrome3(String s) {
-        s = s.toLowerCase().replace(" ","").replaceAll("[^a-z0-9]","");
+    public int maxDepth(TreeNode root) {
+        if(root == null) return 0;
 
-        int j = s.length() -1;
-        for(int i=0; i< s.length()/2; i++){
-            if(s.charAt(i) != s.charAt(j)){
-                return false;
-            }else{
-                j--;
-            }
-        }
-        return true;
+        int leftHight = maxDepth(root.left);
+        int rightHight = maxDepth(root.right);
+
+        return 1 + Math.max(leftHight, rightHight);
     }
 
 
@@ -698,6 +693,71 @@ public class Arrays {
 
 }
 
+class MyStack {
+    private Queue<Integer> queue;
+    private Queue<Integer> stack;
+
+    public MyStack() {
+        queue = new LinkedList<>();
+        stack= new LinkedList<>();
+    }
+
+    public void push(int x) {
+        while(stack.size() > 0){
+            queue.add(stack.remove());
+        }
+
+        stack.add(x);
+
+        while(queue.size() > 0){
+            stack.add(queue.remove());
+        }
+    }
+
+    public int pop() {
+        return stack.remove();
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public boolean empty() {
+        return stack.isEmpty();
+    }
+}
+class MyQueue {
+    private Deque<Integer> stack;
+    private Deque<Integer> queue;
+    public MyQueue() {
+        stack = new ArrayDeque<>();
+        queue = new ArrayDeque<>();
+    }
+
+    public void push(int x) {
+        while(!queue.isEmpty()){
+            stack.push(queue.remove());
+        }
+
+        queue.add(x);
+
+        while(!stack.isEmpty()){
+            queue.push(stack.remove());
+        }
+    }
+
+    public int pop() {
+        return queue.remove();
+    }
+
+    public int peek() {
+        return queue.peek();
+    }
+
+    public boolean empty() {
+        return queue.isEmpty();
+    }
+}
 
 
 
