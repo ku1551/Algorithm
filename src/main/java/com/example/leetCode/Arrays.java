@@ -736,6 +736,75 @@ public class Arrays {
             }
         }
     }
+    public List<Integer> spiralOrder(int[][] matrix) {
+
+        List<Integer> list = new ArrayList<>();
+
+        int height = matrix.length;
+        int width = matrix[0].length;
+        int hinit = 0;
+        int winit = 0;
+        int idx = 0;
+
+        while(height >= hinit && width >= winit){
+            switch (idx %4){
+                case 0:
+                    for(int i=winit; i<width; i++){
+                        list.add(matrix[hinit][i]);
+                    }
+                    hinit++;
+                    idx++;
+                    break;
+                case 1 :
+                    for(int i=hinit; i<height; i++){
+                        list.add(matrix[i][width-1]);
+                    }
+                    idx++;
+                    width--;
+                    break;
+                case 2 :
+                    for(int i=width-1; i>=winit; i--){
+                        list.add(matrix[height-1][i]);
+                    }
+                    idx++;
+                    height--;
+                    break;
+                case 3 :
+                    for(int i=height-1; i >=hinit; i--){
+                        list.add(matrix[i][winit]);
+                    }
+                    idx++;
+                    winit++;
+                    break;
+            }
+        }
+        return list;
+    }
+
+    class Solution {
+        public void rotate(int[][] matrix) {
+            for(int i=0; i<matrix.length; i++){
+                for(int j=i; j<matrix[0].length; j++){
+                    int tmp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = tmp;
+                }
+            }
+
+            for(int i=0; i<matrix.length; i++){
+                int left = 0, right = matrix.length-1;
+
+                while(left < right){
+                    int tmp = matrix[i][left];
+                    matrix[i][left] = matrix[i][right];
+                    matrix[i][right] = tmp;
+
+                    left++;
+                    right--;
+                }
+            }
+        }
+    }
 
 
 
