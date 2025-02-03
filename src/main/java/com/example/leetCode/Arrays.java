@@ -101,15 +101,15 @@ public class Arrays {
         return result;
     }
 
-    public int maxSubArray(int[] nums) {
-        int now = nums[0], result = nums[0];
-
-        for(int i=1; i<nums.length; i++){
-            now = Math.max(nums[i], now+nums[i]);
-            result = Math.max(now,result);
-        }
-        return result;
-    }
+//    public int maxSubArray(int[] nums) {
+//        int now = nums[0], result = nums[0];
+//
+//        for(int i=1; i<nums.length; i++){
+//            now = Math.max(nums[i], now+nums[i]);
+//            result = Math.max(now,result);
+//        }
+//        return result;
+//    }
 
     public int maxProduct(int[] nums) { //Maximum Product Subarray
         int  min = nums[0], max = nums[0], result =max ;
@@ -503,104 +503,104 @@ public class Arrays {
 
     }
 
-    public boolean isPalindrome(ListNode head) { //234.Palindrome Linked List
-        List<Integer> list = new ArrayList<>();
-
-        while(head.next != null){
-            list.add(head.val);
-            head = head.next;
-        }
-
-        int left = 0, right = list.size()-1;
-        while(left<right){
-            if(list.get(left) != list.get(right)){
-                return false;
-            }
-            left++;
-            right--;
-        }
-        return true;
-    }
-
-    public ListNode reverseList(ListNode head) {
-        // return reverse(head, null);
-        ListNode prev = null, node = head;
-
-        while(node != null){
-            ListNode next = node.next;
-
-            node.next = prev;
-
-            prev = node;
-
-            node = next;
-        }
-        return prev;
-    }
-
-    private ListNode reverse(ListNode node, ListNode prev){
-        if(node == null) return prev;
-
-        ListNode next = node.next;
-
-        node.next = prev;
-
-        return reverse(next, node);
-    }
-
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode result = new ListNode(0);
-        ListNode current = result;
-        int carry = 0;
-
-        while (l1 != null || l2 != null || carry > 0) {
-            int sum = carry;
-
-            if (l1 != null) {
-                sum += l1.val;
-                l1 = l1.next;
-            }
-
-            if (l2 != null) {
-                sum += l2.val;
-                l2 = l2.next;
-            }
-            carry = sum / 10;
-
-            current.next = new ListNode(sum % 10);
-            current = current.next;
-        }
-
-        return result.next;
-    }
-
-    public ListNode swapPairs(ListNode head) { // 24 Swap Nodes in Pairs
-        if(head == null || head.next == null) return head;
-
-        ListNode n = head.next;
-        head.next = swapPairs(head.next.next);
-        n.next = head;
-        return n;
-    }
-
-    public ListNode oddEvenList(ListNode head) { //328 Odd Even Linked List
-        if(head == null) return head;
-
-        ListNode odd = head;
-        ListNode even = head.next;
-        ListNode evenHead = even;
-
-        while(even != null && even.next != null){
-            odd.next = odd.next.next;
-            even.next = even.next.next;
-
-            odd = odd.next;
-            even = even.next;
-        }
-        odd.next = evenHead;
-
-        return head;
-    }
+//    public boolean isPalindrome(ListNode head) { //234.Palindrome Linked List
+//        List<Integer> list = new ArrayList<>();
+//
+//        while(head.next != null){
+//            list.add(head.val);
+//            head = head.next;
+//        }
+//
+//        int left = 0, right = list.size()-1;
+//        while(left<right){
+//            if(list.get(left) != list.get(right)){
+//                return false;
+//            }
+//            left++;
+//            right--;
+//        }
+//        return true;
+//    }
+//
+//    public ListNode reverseList(ListNode head) {
+//        // return reverse(head, null);
+//        ListNode prev = null, node = head;
+//
+//        while(node != null){
+//            ListNode next = node.next;
+//
+//            node.next = prev;
+//
+//            prev = node;
+//
+//            node = next;
+//        }
+//        return prev;
+//    }
+//
+//    private ListNode reverse(ListNode node, ListNode prev){
+//        if(node == null) return prev;
+//
+//        ListNode next = node.next;
+//
+//        node.next = prev;
+//
+//        return reverse(next, node);
+//    }
+//
+//    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+//        ListNode result = new ListNode(0);
+//        ListNode current = result;
+//        int carry = 0;
+//
+//        while (l1 != null || l2 != null || carry > 0) {
+//            int sum = carry;
+//
+//            if (l1 != null) {
+//                sum += l1.val;
+//                l1 = l1.next;
+//            }
+//
+//            if (l2 != null) {
+//                sum += l2.val;
+//                l2 = l2.next;
+//            }
+//            carry = sum / 10;
+//
+//            current.next = new ListNode(sum % 10);
+//            current = current.next;
+//        }
+//
+//        return result.next;
+//    }
+//
+//    public ListNode swapPairs(ListNode head) { // 24 Swap Nodes in Pairs
+//        if(head == null || head.next == null) return head;
+//
+//        ListNode n = head.next;
+//        head.next = swapPairs(head.next.next);
+//        n.next = head;
+//        return n;
+//    }
+//
+//    public ListNode oddEvenList(ListNode head) { //328 Odd Even Linked List
+//        if(head == null) return head;
+//
+//        ListNode odd = head;
+//        ListNode even = head.next;
+//        ListNode evenHead = even;
+//
+//        while(even != null && even.next != null){
+//            odd.next = odd.next.next;
+//            even.next = even.next.next;
+//
+//            odd = odd.next;
+//            even = even.next;
+//        }
+//        odd.next = evenHead;
+//
+//        return head;
+//    }
 
     public boolean isValid(String s) {
         Deque<Character> stack = new ArrayDeque<>();
@@ -679,14 +679,14 @@ public class Arrays {
         return result;
     }
 
-    public int maxDepth(TreeNode root) {
-        if(root == null) return 0;
-
-        int leftHight = maxDepth(root.left);
-        int rightHight = maxDepth(root.right);
-
-        return 1 + Math.max(leftHight, rightHight);
-    }
+//    public int maxDepth(TreeNode root) {
+//        if(root == null) return 0;
+//
+//        int leftHight = maxDepth(root.left);
+//        int rightHight = maxDepth(root.right);
+//
+//        return 1 + Math.max(leftHight, rightHight);
+//    }
 
     public int numDecodings(String s) {
         if (s == null || s.length() == 0 || s.charAt(0) == '0') {
@@ -838,6 +838,23 @@ public class Arrays {
 
         visited[i][j] = false;
         return false;
+    }
+
+    public int lengthOfLongestSubstring(String s) {
+        Set<Character> set = new HashSet<>();
+        int left = 0, right = 0, maxLength = 0;
+
+        while(right < s.length()){
+            if(!set.contains(s.charAt(right))){
+                set.add(s.charAt(right));
+                maxLength = Math.max(maxLength, right-left+1);
+                right++;
+            }else{
+                set.remove(s.charAt(left));
+                left++;
+            }
+        }
+        return maxLength;
     }
 
 

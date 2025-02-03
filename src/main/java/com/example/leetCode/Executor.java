@@ -15,7 +15,8 @@ public class Executor {
         wordDict.add("code");
 
         int[][] arrs = {{1,2},{2,1},{3,4},{5,6}};
+        String ss = "abcabcbb";
 
-        arr.numEquivDominoPairs(arrs);
+        arr.lengthOfLongestSubstring(ss);
     }
 }
