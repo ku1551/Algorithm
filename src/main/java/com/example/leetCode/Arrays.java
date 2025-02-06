@@ -895,6 +895,21 @@ public class Arrays {
 //    }
 
 
+//    public TreeNode invertTree(TreeNode root) { 226 번 문항
+//        if(root == null) return root;
+//
+//        invertTree(root.left);
+//        invertTree(root.right);
+//
+//        TreeNode tmp = root.left;
+//        root.left = root.right;
+//        root.right = tmp;
+//
+//        return root;
+//    }
+    
+
+
 }
 
 class MyStack {
