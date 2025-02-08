@@ -907,6 +907,24 @@ public class Arrays {
 //
 //        return root;
 //    }
+
+// public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+//     if(subRoot == null) return true;
+//     if(root == null ) return false;
+
+//     if(checkTree(root, subRoot)) return true;
+
+//     return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+// }
+
+// public boolean checkTree(TreeNode r, TreeNode s){
+//     if(r == null && s == null) return true;
+//     if(r ==null || s == null) return false;
+
+//     if(r.val != s.val) return false;
+
+//     return checkTree(r.left, s.left) && checkTree(r.right, s.right);
+// }
     
 
 
