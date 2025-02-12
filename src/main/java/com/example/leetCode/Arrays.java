@@ -950,6 +950,20 @@ public class Arrays {
 //         return root;
 //     }
 // }
+    public int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
+        int distance = 0;
+        Set set = new HashSet<>();
+        for(int i=0; i<arr1.length; i++){
+            set.add(arr1[i]);
+        }
+        for(int i=0; i<arr1.length; i++){
+            for(int j=0; j<arr2.length; j++){
+                int tmp = Math.abs(arr1[i] - arr2[j]);
+                if(tmp <= d  && !set.contains(arr2[j])) distance++;
+            }
+        }
+        return distance;
+    }
 
 
 }
