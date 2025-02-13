@@ -964,6 +964,17 @@ public class Arrays {
         }
         return distance;
     }
+    public int minimumCost(int[] cost) {
+        java.util.Arrays.sort(cost);
+        int result = 0;
+        for(int i=cost.length-1; i >=0; i -=3){
+            result += cost[i];
+            if(i -1 >= 0){
+                result += cost[i-1];
+            }
+        }
+        return result;
+    }
 
 
 }
